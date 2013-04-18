@@ -1,0 +1,9 @@
+.head_name
+  %p
+.viewport
+  .overview{:style => "margin-top: 0px;"}
+    .all_contacts
+.chat_input_box
+  %form
+    %input#chat_message_input{:placeholder => "Input text", :type => "text", :value => ""}
+      %input#chat_message_submit{:type => "submit", :value => "Send"}

@@ -1,0 +1,55 @@
+.content_block.layers_block.full_width_layer{:data => {:id => "c-#{@id}"}}
+  .inner_first
+    .inner_seccond
+      .head
+        %a.close{:href => "#", :data => {:action => 'close_layer', :title => 'Закрыть'}}
+        - if @can_edit
+          %a.pull-right.destroy.trash{:href => "#", :title => 'Удалить'}
+        -#%a.pull-right.star{:href => "#", :title => 'Добавить в избранное'}
+      .layers_block_le.viewport
+        .overview
+          .detail-info
+            .tabs-block.tabs-left
+              .tab-content{:style => "margin-left: 10px"}
+                .tab-pane.active#detail
+                  .person-info
+
+                    - if @can_edit
+                      .name.name_feelds
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Фамилия:'}
+                        %input.edit_field{:type => 'text', :name => 'surname', :value => @surname, :placeholder => '...'}
+                      .name.name_feelds
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Имя:'}
+                        %input.edit_field{:type => 'text', :name => 'name', :value => @name, :placeholder => '...'}
+                      .name.name_feelds
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Отчество:'}
+                        %input.edit_field{:type => 'text', :name => 'subname', :value => @subname, :placeholder => '...'}
+                    - else
+                      %p= @surname
+                      %p= @name
+                      %p= @subname
+                    .name.name_feelds
+                      - if @can_edit
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Должность:'}
+                        %input.edit_field{:type => 'text', :name => 'text', :value => @text, :placeholder => '...'}
+                      - else
+                        %p= @text
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Почта:', :placeholder => 'Почта:'}
+                      - if @can_edit
+                        %input.edit_field{:type => 'text', :name => 'email', :value => @email, :placeholder => '...'}
+                      - else
+                        %p= @email
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Телефон:', :placeholder => 'Телефон:'}
+                      - if @can_edit
+                        %input.edit_field{:type => 'text', :name => 'phone', :value => @phone, :placeholder => '...'}
+                      - else
+                        %p= @phone
+
+        .scrollbar
+          .track
+            .thumb
+              .end

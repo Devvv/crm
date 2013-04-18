@@ -1,0 +1,20 @@
+.content_block.layers_block{:data => { :id => 'u-new' } }
+  .inner_first
+    .inner_seccond
+      .head
+        %a.close{:href => "javascript:;", :data => {:action => 'close_layer', :layer => 'user-new', :title => 'Закрыть'}}
+        %a.pull-right.destroy.trash{:href => "javascript:;", :title => 'Удалить'}
+        -#%a.pull-right.star{:href => "javascript:;", :title => 'Добавить в избранное'}
+      .layers_block_le.viewport
+        .overview
+          .detail-info
+            .detail-name
+              %textarea#search-name.auto_resize{:name => 'name', :placeholder => 'Начните вводить имя или email'}
+              .text_area_div
+            .divider.mb
+            .detail-text#user-list
+
+        .scrollbar
+          .track
+            .thumb
+              .end

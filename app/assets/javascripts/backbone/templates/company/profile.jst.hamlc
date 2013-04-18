@@ -1,0 +1,116 @@
+.content_block.full_width_layer
+  .inner_first
+    .inner_seccond
+      .head
+        = t.profile
+      .layers_block_le.viewport
+        .overview
+          .detail-info
+            .tabs-block.tabs-left
+              %ul.nav.nav-tabs
+                %li.active
+                  %a.tab{:href => "#detail", 'data-toggle' => "tab"}= t.detail
+                -#%li
+                -#  %a.tab{:href => "#resume", 'data-toggle' => "tab"}= t.resume
+                -#%li
+                -#  %a.tab{:href => "#companies", 'data-toggle' => "tab"}= t.companies
+                - if @can_edit > 0
+                  %li
+                    %a.tab{:href => "#option", 'data-toggle' => "tab"}= t.options
+              .tab-content
+                .tab-pane.active#detail
+                  .person-info
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Название'}
+                      - if @can_edit > 0
+                        %input.edit_field{:type => 'text', :name => 'name', :value => @name, :placeholder => '...'}
+                      - else
+                        %input.disable{:disabled => "disabled", :type => 'text', :name => 'name', :value => @name, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Телефон'}
+                      - if @can_edit > 0
+                        %input.edit_field{:type => 'text', :name => 'phone', :value => @phone, :placeholder => '...'}
+                      - else
+                        %input.disable{:disabled => "disabled", :type => 'text', :name => 'phone', :value => @phone, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Адрес'}
+                      - if @can_edit > 0
+                        %input.edit_field{:type => 'text', :name => 'address', :value => @address, :placeholder => '...'}
+                      - else
+                        %input.disable{:disabled => "disabled", :type => 'text', :name => 'address', :value => @address, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'ИНН'}
+                      - if @can_edit > 0
+                        %input.edit_field{:type => 'text', :name => 'inn', :value => @inn, :placeholder => '...'}
+                      - else
+                        %input.disable{:disabled => "disabled", :type => 'text', :name => 'inn', :value => @inn, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'КПП'}
+                      - if @can_edit > 0
+                        %input.edit_field{:type => 'text', :name => 'kpp', :value => @kpp, :placeholder => '...'}
+                      - else
+                        %input.disable{:disabled => "disabled", :type => 'text', :name => 'kpp', :value => @kpp, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'ОГРН'}
+                      - if @can_edit > 0
+                        %input.edit_field{:type => 'text', :name => 'ogrn', :value => @ogrn, :placeholder => '...'}
+                      - else
+                        %input.disable{:disabled => "disabled", :type => 'text', :name => 'ogrn', :value => @ogrn, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Дата рег.'}
+                      - if @can_edit > 0
+                        %input.edit_field{:type => 'text', :name => 'reg_date', :value => Beweek3.todate(@reg_date, false), :placeholder => '...'}
+                      - else
+                        %input.disable{:disabled => "disabled", :type => 'text', :name => 'reg_date', :value => Beweek3.todate(@reg_date, false), :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Информация', :placeholder => 'Информация'}
+                      - if @can_edit
+                        %textarea.edit_field.auto_resize{:name => "text", :placeholder => "Информация"}= @text
+                      - else
+                        %p= @text
+
+                - if @can_edit > 0
+                  .tab-pane#option
+                    .person-info
+                      -#%h1 Смена тарифного плана
+                      #change_tarif
+                        %form#change_plan_form{:action => 'http://test.robokassa.ru/Index.aspx'}
+                          %input{:type => "hidden", :name => "MrchLogin", :value => "beweek.ru"}
+                          %input{:type => "hidden", :name => "OutSum", :value => ""}
+                          %input{:type => "hidden", :name => "InvId", :value => ""}
+                          %input{:type => "hidden", :name => "Desc", :value => "Оплата тарифа"}
+                          %input{:type => "hidden", :name => "SignatureValue", :value => ""}
+                          %label
+                            Использовано дискового пространства: #{@store_count_mb} / #{@store_limit_mb}
+                          %label
+                            Текущий тарифный план: #{t['company_type_' + @type_id]}
+                            %a.change_tarif#change_tarif_go{:href => "javascript:;"}= t.change_tarif
+                          %select#change_tarif_select{:disabled => true, :style => "display:none;"}
+                            %option{:value => 0,} Стартап
+                            %option{:value => 1, :selected => true} Проект
+                            %option{:value => 2} Компания
+
+                          .actions
+                            %input.btn.btn-success#change_tarif_btn{:type => "submit", :value => "Оплатить", :style => "display:none;"}
+
+            .img-block
+              .person-img
+                %img{:src => @photo_path_medium, :width => '110', :height =>'110', :alt => '' }
+                - if @can_edit
+                  .load-img
+                    %form#user_photo{:action => "/ajax/user_photo", :enctype => "multipart/form-data", :method => "post"}
+                      %input.photo_field{type: "file", name: "user[photo]"}
+
+                    Изменить
+        .scrollbar
+          .track
+            .thumb
+              .end

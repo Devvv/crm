@@ -1,0 +1,74 @@
+.content_block.full_width_layer
+  .inner_first
+    .inner_seccond
+      .head
+        = t.my_profile
+      .layers_block_le.viewport
+        .overview
+          .detail-info
+            .tabs-block.tabs-left
+              %ul.nav.nav-tabs
+                %li.active
+                  %a.tab{:href => "#detail", 'data-toggle' => "tab"}= t.detail
+                -#%li
+                -#  %a.tab{:href => "#resume", 'data-toggle' => "tab"}= t.resume
+                -#%li
+                -#  %a.tab{:href => "#companies", 'data-toggle' => "tab"}= t.companies
+                %li
+                  %a.tab{:href => "#option", 'data-toggle' => "tab"}= t.options
+              .tab-content
+                .tab-pane.active#detail
+
+                  .person-info
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Фамилия'}
+                      %input.edit_field{:type => 'text', :name => 'surname', :value => @surname, :placeholder => '...'}
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Имя'}
+                      %input.edit_field{:type => 'text', :name => 'name', :value => @name, :placeholder => '...'}
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Отчество'}
+                      %input.edit_field{:type => 'text', :name => 'subname', :value => @subname, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Должность'}
+                      %input.edit_field{:type => 'text', :name => 'vacancy', :value => @vacancy, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Почта', :placeholder => 'Почта'}
+                      %input.edit_field{:type => 'text', :name => 'email', :value => @email, :placeholder => '...'}
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Телефон', :placeholder => 'Телефон'}
+                      %input.edit_field{:type => 'text', :name => 'phone', :value => @phone, :placeholder => '...'}
+
+                    .detail-info
+                      .detail-name
+                        %textarea.edit_field.auto_resize{:name => "resume", :placeholder => t.resume}= @resume
+
+                .tab-pane#resume
+                  .person-info
+                    %textarea.edit_field{:name => "resume"}
+
+                .tab-pane#option
+                  .person-info
+                    #change_password
+                      %a.change_password{:href => "javascript:;"}= t.change_password
+                    #social_links
+
+            .img-block
+              .person-img
+                %img{:src => @photo_path_medium, :width => '110', :height =>'110', :alt => '' }
+                .load-img
+                  %form#user_photo{:action => "/ajax/user_photo", :enctype => "multipart/form-data", :method => "post"}
+                    %input.photo_field{type: "file", name: "user[photo]"}
+
+                  Изменить
+
+
+
+        .scrollbar
+          .track
+            .thumb
+              .end

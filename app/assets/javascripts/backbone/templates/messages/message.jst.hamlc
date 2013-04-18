@@ -1,0 +1,23 @@
+- if @status == 1
+  .message_box_text
+    %small
+      сообщение удалено
+- else
+  .img_box
+    - u = @user
+    - if u
+      %img{ :alt => u.get_name(), :height => 40, :src => u.get('photo_path_thumb'), :width => 40}
+    - else
+      %img.u_avatar{ :alt => '', :height => 40, :src => '', :width => 40}
+
+  .message_box_text
+
+    - if u
+      =u.get_name()
+    = window.Beweek3.todate(@created_at)
+    %br
+    =@text
+    - if @my_message
+      %br
+      %button.stason_delete_message_btn
+        удалить

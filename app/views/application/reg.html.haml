@@ -1,0 +1,55 @@
+!!!
+%html.overflow_hidden
+  %head
+    %title Beweek2
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "auth"
+
+    = csrf_meta_tags
+    = yield(:head)
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};"
+  %body.white_bg
+    .container-fluid.clear_left_margin
+      .content_block{:style => 'margin: 0 auto'}
+        .book
+
+          %div.form_el.short_form_el
+            .img_logo
+              %img{:src => 'assets/theme_1/big_logo.png', :title => '', :width => '371', :height => '80'}
+              %p.error= flash[:alert]
+            .form_el_bg
+
+              - if user_signed_in?
+                %p
+                  You are logged in as #{current_user.get_name}
+                %p= link_to t(:logout), :out
+              - else
+                = form_tag '', :method => :post, :class => 'form-horizontal ', :id => 'auth_form' do
+                  .control-group
+                    //%label.control-label{:for => "inputEmail"}= t(:email)
+                    .controls
+                      %i.abs_pass Почта
+                      = text_field_tag 'user[email]', @imail, :disabled => false , :id => 'email'
+                      %img.ico_mail{:src => 'assets/theme_1/ico_mail.png', :title => '', :width => '26', :height => '21'}
+                  -#.control-group
+                    %label.control-label{:for => "inputPassword"}= t(:password)
+                    .controls
+                      = password_field_tag 'user[password]'
+                  .control-group.clear_block
+                  .control-group
+
+                    .controls
+              
+                      %a.btn-link-dis{:href => :auth}= t(:sign_in)
+                      %span.btn-link-dis &nbsp;|&nbsp;
+                      %a.btn-link-dis{:href => :forget}= t(:forget)
+                      %button.btn.btn-primary#auth_submit{:type => "submit"}= t(:sign_up)
+                      %script  
+                -# if devise_mapping.omniauthable?
+                  Войти через социальные сети
+                  %br
+                  - resource_class.omniauth_providers.each do |provider|
+                    = link_to omniauth_authorize_path(resource_name, provider) do
+                      %div{:class => provider.to_s}
+

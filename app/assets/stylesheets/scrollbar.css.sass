@@ -1,0 +1,33 @@
+.viewport
+  position: relative
+  overflow: hidden
+  .overview
+    margin-top: 0
+.thumb .end, .thumb
+
+
+.scrollbar
+  position: absolute
+  top:  0
+  right: 2px
+  width: 6px
+  visibility: hidden
+.track
+  background-color: transparent
+  height: 100%
+  width: 5px
+  position: relative
+.thumb
+  height: 20px
+  width: 4px
+  cursor: pointer
+  overflow: hidden
+  position: absolute
+  border: 1px solid rgba(73,80,87, 0.5)
+  top: 0
+  @include box-shadow( -1px 1px 3px 0px rgba(0, 0, 0, 0.3) )
+  background: rgba(73,80,87, 0.4)
+  @include border-radius (5px)
+.scrollbar.disable
+  visibility: hidden !important
+  display: none !important

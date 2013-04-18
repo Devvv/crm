@@ -1,0 +1,29 @@
+!!!
+%html.overflow_hidden
+  %head
+    %title Beweek2
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "auth"
+
+    = csrf_meta_tags
+    = yield(:head)
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};"
+  %body.white_bg
+    .container-fluid.clear_left_margin
+      .content_block{:style => 'margin: 0 auto'}
+        .book
+
+          %div.form_el.only_error_success.short_form_el
+            .img_logo
+              %img{:src => 'assets/theme_1/big_logo.png', :title => '', :width => '371', :height => '80'}
+              %p.error= flash[:alert]
+              %p.success
+                Вам отправлено письмо с дальнейшими инструкциями
+                %br
+                %br
+                %a{:href => '/', :title => ''} Вернуться главную
+            .form_el_bg
+
+
+

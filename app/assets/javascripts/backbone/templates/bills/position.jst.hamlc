@@ -1,0 +1,5 @@
+%input{:type => "text", :name => "name", :value => @name, :class => "inner_edit_field"}
+%input{:type => "text", :name => "count", :value => @count, :class => "inner_edit_field"}
+%input{:type => "text", :name => "units", :value => @units, :class => "inner_edit_field"}
+%input{:type => "text", :name => "price", :value => @price, :class => "inner_edit_field"}
+%input{:type => "text", :name => "sum", :value => @sum, :class => "inner_edit_field", :readonly => true}

@@ -1,0 +1,35 @@
+.content_block
+  .inner_first
+    .inner_seccond
+      .head
+        .info_block
+          Почта
+        .info_block
+          Телефон
+        .button-box.pull-left
+          .add_btn{:url => '/conts/u-new'}
+        .search
+          %input{:type => 'text', :value => '', :placeholder => 'Поиск'}
+      .viewport.content_inner_viewport
+        %ul.container_list.list.overview.company
+
+        .scrollbar
+          .track
+            .thumb
+              .end
+
+.filter_block.viewport
+  .overview
+    .filter-box
+      - chk = []
+      - for u in @users
+        - if _.indexOf(chk, u.appointment) == -1 and u.appointment != ""
+          .filter-line{:data => {:type => u.appointment}}
+            .checkbox-filter.custom_checkbox.active
+            .name-filter= u.appointment
+        - chk.push u.appointment
+
+  .scrollbar
+    .track
+      .thumb
+        .end

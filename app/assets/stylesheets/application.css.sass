@@ -1,0 +1,574 @@
+/* Bootstrap v2.1.0
+/*
+/* Copyright 2012 Twitter, Inc
+/* Licensed under the Apache License v2.0
+/* http://www.apache.org/licenses/LICENSE-2.0
+/*
+/* Designed and built with all the love in the world @twitter by @mdo and @fat.
+/* Converted to Sass by @thomasmcdonald_, and distributed as bootstrap-sass
+
+/* Core variables and mixins
+
+/*@import bootstrap-wysihtml5/index
+
+@import "fullcalendar"
+
+@import "fileupload"
+
+@import "bootstrap/variables"
+@import "bootstrap/mixins"
+
+/* CSS Reset
+@import "bootstrap/reset"
+
+/* Grid system and page structure
+@import "bootstrap/scaffolding"
+//@import "bootstrap/grid"
+@import "bootstrap/layouts"
+
+/* Base CSS
+@import "bootstrap/type"
+@import "bootstrap/code"
+@import "bootstrap/forms"
+@import "bootstrap/tables"
+
+/* Components: common
+@import "bootstrap/sprites"
+@import "bootstrap/dropdowns"
+@import "bootstrap/wells"
+/*@import "bootstrap/component-animations"
+/*@import "bootstrap/close"
+
+/* Components: Buttons & Alerts
+@import "bootstrap/buttons"
+@import "bootstrap/button-groups"
+@import "bootstrap/alerts"
+
+/* Components: Nav
+@import "bootstrap/navs"
+@import "bootstrap/navbar"
+@import "bootstrap/breadcrumbs"
+@import "bootstrap/pagination"
+@import "bootstrap/pager"
+
+/* Components: Popovers
+@import "bootstrap/modals"
+@import "bootstrap/tooltip"
+/*@import "bootstrap/popovers"
+
+/* Components: Misc
+/*@import "bootstrap/thumbnails"
+@import "bootstrap/labels-badges"
+//@import "bootstrap/progress-bars"
+@import "bootstrap/accordion"
+/*@import "bootstrap/carousel"
+@import "bootstrap/hero-unit"
+
+/* Utility classes
+@import "bootstrap/utilities"
+@import "color"
+@import "lists"
+@import "help"
+@import "scrollbar"
+@import "layers"
+@import "datepicker"
+
+@import "social"
+
+@import "theme_1"
+
+@import "chosen"
+
+@import "fileuploader"
+
+@import "notify"
+
+@import "chat"
+body
+  background: url("/assets/ribbow_bg.jpg") top left repeat !important
+  font-size: 13px
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important
+  color: #5e5e5e
+  .navbar.nav_top_menu
+    .navbar-inner
+      position: relative
+      .page_title
+        position: absolute
+        left:  50%
+        right:  50%
+        top: 0
+        color: #ffffff
+        font-size: 14px
+        line-height: 40px
+      button.chat_button
+        padding-top: 1px
+        padding-bottom: 0px
+        padding-left: 8px
+        padding-right: 7px
+        .menu-chat
+          background: url("/assets/theme_1/left-menu_mini.png") 0 -680px no-repeat
+          width: 33px
+          height: 25px
+        i
+          top: 4px
+          right: 5px
+      button.active
+        background: transparent !important
+        @include box-shadow( inset 0px 1px 2px 0px rgba(0,0,0,0.7) !important)
+      .button_center
+        text-align: center
+        button
+          background: transparent !important
+          color: #ffffff !important
+          text-shadow: -1px -1px 0px #333333
+  .navbar.nav_left_menu
+    width: 250px
+    position: absolute
+    top: 0
+    left:  0
+    bottom: 0
+    padding: 0
+    margin: 0
+    overflow: hidden
+    .top_search_box
+      form
+        display: block
+        position: relative
+        padding: 0
+        margin: 0
+        border-bottom: 1px solid #383d44
+        input
+          border: none
+          background: transparent
+        input[type=text]
+          width: 100%
+          box-sizing: border-box
+          background: rgba(79,88,97,0.3)
+          @include border-radius(15px)
+          border-left: 1px solid rgba(145,150,157, 0.5)
+          border-bottom: 1px solid rgba(145,150,157, 0.5)
+          border-right: 1px solid rgba(145,150,157, 0.5)
+          border-top: 1px solid transparent
+          padding: 5px 10px
+          height: 25px !important
+          font-size: 14px
+          line-height: 15px !important
+          padding-left: 30px
+          margin: 7px 6px
+          width: 94%
+          color: #ffffff
+
+        input[type=submit]
+          width: 15px
+          height: 15px
+          position: absolute
+          left: 15px
+          top: 12px
+          background: transparent url("/assets/theme_1/lupe.png") top left no-repeat
+          border: none
+    .navbar-inner
+      position: absolute
+      left: 0
+      right: 0
+      top: 40px
+      bottom: 0
+      overflow: hidden
+      background-image: none
+      background: transparent
+      //background: url("/assets/theme_1/sprite.png") top left repeat-x
+      min-height: 40px
+      padding: 0 0
+      border: none !important
+      @include border-radius(0 !important)
+      @include box-shadow( 0px 0px 0px rgba(0,0,0,0.5) !important)
+      .overview
+        overflow: hidden
+        .menu_event_list
+          overflow: hidden
+          float: left
+          .top
+            height: 25px
+            border-bottom: 1px solid #383d44
+            position: relative
+            @include box-shadow( 0px 0px 5px rgba(0, 0, 0, 0.5) !important )
+            .i
+              margin-left: 4px
+              margin-top: 0
+              width: 25px
+              height: 25px
+
+              float: left
+            .micro_events
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -30px no-repeat
+            .micro_company
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px 3px no-repeat
+            .micro_companys
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -92px no-repeat
+            .micro_tasks
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -161px no-repeat
+            .micro_deals
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -192px no-repeat
+            .micro_calendars
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -128px no-repeat
+            .micro_documents
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -225px no-repeat
+            .micro_options
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -258px no-repeat
+            .micro_exit
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -290px no-repeat
+            .micro_mails
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px -60px no-repeat
+            .micro_other
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px 0px no-repeat
+            .micro_-user
+              background: transparent url('/assets/theme_1/left-menu_micro.png') 0px 0px no-repeat
+            .name
+              width: 180px
+              font-size: 16px
+              text-align: left
+              color:  #ffffff
+              @include text-overflow()
+              text-shadow: -1px -1px 0px rgba(0,0,0,0.5)
+              float: left
+              margin-left: 7px
+              font-weight: 200
+              margin-top: 2px
+
+            .close_ico
+              width: 8px
+              height: 9px
+              float: right
+              margin-top: 8px
+              margin-right: 10px
+              cursor: pointer
+              background: transparent url('/assets/theme_1/micro_close.png') top left no-repeat
+          ul
+            list-style: none
+            padding: 0
+            margin: 0
+            li
+              border-bottom: 1px solid rgb(79, 81, 89)
+              background: url('/assets/theme_1/blue_dot_micro.png') 11px 49% no-repeat
+              color: #ffffff
+              padding: 5px 0
+              padding-left: 35px
+              width: 215px
+              .name
+                font-size: 14px
+                text-shadow: -1px -1px 0px rgba(0,0,0,0.5)
+                @include text-overflow()
+                margin-bottom: 3px
+              .text
+                font-size: 12px
+                line-height: 16px
+                text-shadow: -1px -1px 0px rgba(0,0,0,0.3)
+                a
+                  width: auto !important
+                  padding: 0
+                  margin: 0
+                  display: inline !important
+                  height: auto !important
+                  border: none !important
+                  color: #11a3ef !important
+                  text-decoration: underline
+
+
+
+
+      ul
+        width: 100%
+        li
+          a.img_user
+
+          .img
+            text-align: center
+            img
+              max-width: 66%
+              max-height: 80%
+              margin-left: -3px
+              margin-top: 4px
+        li
+          .logo
+            img
+              margin: 2px 0 0 5px
+        li.active
+          a:first-child
+            color: #ffffff
+            text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black
+            background: rgba(0, 0, 0, 0.2)
+            @include box-shadow (inset 0 0px 3px rgba(0, 0, 0, 0.3), inset 0 -1px 3px rgba(255, 255, 255, 0.2))
+            border-bottom: 1px solid transparent
+            border-top: 1px solid transparent
+          span
+            color: #ffffff
+        li
+          width: 100%
+          padding: 0
+          margin: 0
+          a
+            width: 100%
+            padding: 0
+            margin: 0
+            display: block
+            height: 38px
+            //@include border-radius(3px)
+            //@include gradient-vertical($startColor: #32394a, $endColor: #2e3442)
+            border-top: 1px solid #737d87
+            border-bottom: 1px solid #4f5159
+            position: relative
+            color: #a3aab6
+
+            div
+              float: left
+              width: 50px
+              height: 38px
+            span
+              display: block
+              line-height: 38px
+              color: #a3aab6
+              text-shadow: 0px 0px 1px #000000
+              @include text-overflow()
+            .menu-company
+              background: url("/assets/theme_1/left_menu_colored.png") 8px 7px no-repeat
+            .menu-events
+              background: url("/assets/theme_1/left_menu_colored.png") 8px -35px no-repeat
+            .menu-companys
+              background: url("/assets/theme_1/left_menu_colored.png") 8px -111px no-repeat
+            .menu-tasks
+              background: url("/assets/theme_1/left_menu_colored.png") 8px -195px no-repeat
+            .menu-deals
+              background: url("/assets/theme_1/left_menu_colored.png") 8px -233px no-repeat
+            .menu-calendars
+              background: url("/assets/theme_1/left_menu_colored.png") 8px -155px no-repeat
+            .menu-documents
+              background: url("/assets/theme_1/left_menu_colored.png") 8px -274px no-repeat
+            .menu-options
+              background: url("/assets/theme_1/left_menu_colored.png") 8px -315px no-repeat
+            .menu-exit
+              background: url("/assets/theme_1/left_menu_colored.png") 8px -353px no-repeat
+            .menu-mails
+            .menu-other
+            .menu-user
+        li.active
+          a
+            .menu-company
+              background: url("/assets/theme_1/left_menu_colored.png") -42px 7px no-repeat
+            .menu-events
+              background: url("/assets/theme_1/left_menu_colored.png") -42px -35px no-repeat
+            .menu-companys
+              background: url("/assets/theme_1/left_menu_colored.png") -42px -111px no-repeat
+            .menu-tasks
+              background: url("/assets/theme_1/left_menu_colored.png") -42px -195px no-repeat
+            .menu-deals
+              background: url("/assets/theme_1/left_menu_colored.png") -42px -233px no-repeat
+            .menu-calendars
+              background: url("/assets/theme_1/left_menu_colored.png") -42px -155px no-repeat
+            .menu-documents
+              background: url("/assets/theme_1/left_menu_colored.png") -42px -274px no-repeat
+            .menu-options
+              background: url("/assets/theme_1/left_menu_colored.png") -42px -315px no-repeat
+            .menu-exit
+              background: url("/assets/theme_1/left_menu_colored.png") -42px -353px no-repeat
+            .menu-mails
+            .menu-other
+            .menu-user
+
+
+        .slide_drop
+          .open
+            height: auto !important
+          .company_slide
+            background: transparent !important
+            background-image: transparent !important
+            position: relative !important
+            @include border-radius(0 !important)
+            border:  none !important
+
+            z-index: 5
+            list-style: none
+            margin: 0
+            padding: 0
+            height: 0
+            overflow: hidden
+            &:before
+              display: none !important
+            &:after
+              display: none !important
+            li
+              a
+                background: transparent !important
+                background-color: transparent !important
+                background-image: transparent !important
+                position: relative !important
+                @include border-radius(0 !important)
+                border:  none !important
+                padding: 10px !important
+                margin: 0 !important
+                color: #ffffff !important
+                display: block !important
+                width: 100% !important
+                height: 100% !important
+                box-sizing: border-box !important
+                text-decoration: none
+                @include text-overflow()
+                text-shadow: -1px -1px 0 #000000 !important
+        .active
+.navbar .nav li.slide_drop.open > .dropdown-toggle,
+.navbar .nav li.slide_drop.active > .dropdown-toggle,
+.navbar .nav li.slide_drop.open.active > .dropdown-toggle
+  color: inherit !important
+  background-color: inherit !important
+
+
+.container-fluid
+  position: absolute
+  right: 0
+  left: 250px
+  top:  0
+  bottom: 0
+  padding: 0
+  margin: 0
+  min-width: 600px
+  @include box-shadow( 5px 0px 15px black !important)
+  .navbar
+    margin-bottom: 0
+    height: 40px
+    margin:  0 !important
+    background: #424857
+    .navbar-inner
+      .nav
+        li
+          position: relative
+          .events
+            width: 15px
+            height: 15px
+            font-size: 12px
+            text-align: center
+            line-height: 15px
+            position: absolute
+            top:  0
+            right:  0
+            text-shadow: none
+            padding: 1px
+            font-weight: normal
+            padding-top: 1px
+            @include border-radius(15px)
+
+@media (min-width: 1200px)
+
+@media (min-width: 768px) and (max-width: 1200px)
+
+@media (max-width: 767px)
+
+@media (max-width: 480px)
+
+
+.error,
+.success
+  color: red
+  font-size: 14px
+  @include border-radius(10px)
+  width:  100%
+  margin: 0
+  text-align: center !important
+  position: absolute
+  left:  0
+  top:  80px
+.success
+  color: #2e8b57
+  top: 112px
+  font-size: 14px
+
+.create_company_plane
+  form
+    position: relative
+    .span3
+      label.well
+        position: relative
+        cursor: pointer !important
+        input
+          visibility: hidden
+          position: absolute
+          top: 0
+          left: 0
+        h3
+          margin-bottom: 0  
+        h2
+          margin-top: 0  
+    .active
+      label.well
+        background: rgba(153,204,255,.4)
+    .forms_el
+      display: none
+.link_block
+  legend
+    font-size: 12px
+    a
+      &:first-child
+        float: left
+      &:last-child
+        float: right
+        margin-right: 15px
+.forms_el
+  .lb 
+    fieldset
+      .form-horizontal
+        .control-group
+          .controls
+            span
+              display: none
+        .control-group.error_field
+          .controls
+            span
+              display: block
+              color: red
+              font-size: 14px
+
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly]
+  background: transparent !important
+
+button.btn.btn-navbar
+  background: transparent
+  display: block
+  float: left
+  &:hover
+    background: transparent
+.only_error_success
+  overflow: hidden
+  .success,
+  .error
+    left: 0
+    width: 100%
+    text-align: center
+    font-size: 22px
+.clear_left_margin
+  left: 0 !important
+
+i.events_bubble_red
+  text-align: center
+  position: absolute
+  width: auto
+  min-width: 1em
+  line-height: 1.2em
+  font-size: 10px
+  right: 5px
+  top: 0.8em
+  max-width: 95%
+  -webkit-background-clip: padding
+  background-clip: padding-box
+  -webkit-border-radius: 0.2em
+  border-radius: 10px
+  padding: 2px 3px
+  z-index: 2
+  @include gradient-vertical($startColor: #dfa28b, $endColor: #c83800)
+  text-shadow: rgba(0, 0, 0, 0.8) 0 -0.08em 0
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 0.1em 0.1em
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0.1em 0.1em
+  overflow: hidden
+  color: rgb(255, 204, 204)
+  border: 2px solid #f0f1f4

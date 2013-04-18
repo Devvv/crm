@@ -1,0 +1,256 @@
+!!!
+%html
+  %head
+    %title Beweek3
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}/
+    %link{:href => "/assets/theme_1/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    -#%link{:href => "/assets/theme_1/favicon.png", :rel => "shortcut icon", :type => "image/x-png"}/
+    %script cid = #{@company.id}
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = yield(:head)
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};"
+  %body
+    .container-fluid
+      .navbar.nav_top_menu
+        .navbar-inner
+          %button#left_menu_btn.btn.btn-navbar.pull-left.active{ type: "button", 'data-toggle' => "collapse" }
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %button.chat_button.btn.btn-navbar.pull-left#stason_chat_btn{ type: "button" }
+            .menu-chat
+            %i.events_bubble_reds#stason_chat_count_summary
+              0
+          -#.button_center
+            %button#agendaDay.btn.viewChange.active
+              День
+            %button#agendaWeek.btn.viewChange
+              Неделя
+            %button#month.btn.viewChange
+              Месяц
+          //%p{style: 'text-align: center; color: #ffffff; padding: 10px 0'} Test
+          -#%ul.nav.pull-right
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                //%div.menu-user
+                = current_user.get_name
+              %ul.dropdown-menu
+                %li
+                  %a{:href => "#", :title => ''}
+                    %i.icon-play
+                    Работаю
+                %li
+                  %a{:href => "#", :title => ''}
+                    %i.icon-pause
+                    Отошел
+                %li
+                  %a{:href => "/profile", :title => ''}
+                    %i.ico.icon-user
+                    Профиль
+                %li.divider
+                %li
+                  %a.link{:href => "/out", :title => ''}
+                    %i.icon-off
+                    = t(:quit)
+          - if current_user.invites.actived.exists?
+            - invs = current_user.invites.actived
+            %ul.nav.pull-right
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  -#%div.menu-user
+                  Приглашения (#{invs.count})
+                %ul.dropdown-menu
+                  - invs.each do |i|
+                    %li
+                      %a{:href => "#"}
+                        Приглашение от компании
+                        %b #{i.company ? i.company.name : "unnamed"}
+                      %a.link{:href => "/auth?i=" + i.code.to_s, :title => ''}
+                        %i.icon-play
+                        Принять
+                    %li.divider
+          %ul.nav.pull-right
+            %li
+              %a.store_size{:href => "#"}
+                %span#store_count #{number_to_human_size(@company.store_count, {:locale => :en})}
+                %span /
+                %span#store_limit #{number_to_human_size(@company.store_limit, {:locale => :en})}
+          -#.form.navbar-search.pull-right
+            %input.span2{:type => "text", :class => "search-query", :placeholder => "Smart search"}
+          .page_title
+            // script set title
+
+      = yield
+      .chat_block
+        .content_block
+
+          .head
+            .button-box.pull-left
+              #chat_close_btn.close_btn.close.chat_close{:url => ""}
+            .title
+              = t(:chat)
+            .all_contacts_btn#stason_contact_list
+              %i.icon-user
+              = t(:chat_contacts)
+
+          .chat_box
+            .left_column
+              .head_search
+                .search
+                  %input{:placeholder => "Search", :type => "text", :value => ""}
+              .viewport
+                .overview
+
+                .scrollbar
+                  .track
+                    .thumb
+                      .end
+
+            .right_column
+              .head_name
+                %p
+              .viewport
+                .overview
+                  .all_contacts
+                .scrollbar
+                  .track
+                    .thumb
+                      .end
+              -#.chat_input_box
+                %form
+                  %input#chat_message_input{:placeholder => "Input text", :type => "text", :value => ""}
+                  %input#chat_message_submit{:type => "submit", :value => "Send"}
+    .navbar.nav_left_menu
+      .top_search_box.glass
+        %form
+          %input{:placeholder => "Search", :type => "text", :value => ""}
+          %input{:type => "submit", :value => ""}
+      .navbar-inner.viewport
+        .overview
+
+          %ul.nav
+            %li
+              %a.img_user{:href => '/profile'}
+                %div.img
+                  %img{:src => current_user.photo(:thumb), :width => '50', :height => '38'}
+                %span#current_user{data: {id: current_user.id, ac: @connection.access}}
+                  = current_user.get_name
+            %li.slide_drop
+              %a{:href => "/company", :title => ''}
+                %div.menu-company
+                %span#company_ident{:data => {:id => @company.id}}
+                  = @company.name
+              %ul.company_slide
+                - @companies.each do |c|
+                  - if c.id.to_i != @company.id.to_i
+                    %li
+                      -#.dropdown-submenu
+                      %a.link{:href => "/?c=" + c.id.to_s, :title => c.name}= c.name
+                      -#%ul.dropdown-menu
+                        %li
+                          %a{:href => "#", :title => ''}= t(:edit_company)
+                -#%li
+                  %a{:href => "/companies", :title => "Companies"}= t(:companies)
+                -#%li
+                  %a{:href => "/create", :title => "Create company"}= t(:create_company)
+            %li
+              %a{:href => "/events"}
+                %div.menu-events
+                %span
+                  = t(:events)
+            %li
+              %a{:href => "/conts"}
+                %div.menu-companys
+                %span
+                  = t(:contacts)
+                -#%i 1
+            -#%li{:class => params[:controller] == 'mail' ? 'active' : ''}
+              %a{:href => "/mail"}
+                Почта
+                %span.events.badge.badge-important 5
+            %li
+              %a{:href => "/tasks"}
+                %div.menu-tasks
+                %span
+                  = t(:tasks)
+                  %i.events_bubble_red#stason_tasks_counter
+            %li
+              %a{:href => "/deals"}
+                %div.menu-deals
+                %span
+                  = t(:deals)
+                  %i.events_bubble_red#stason_deals_counter
+            %li
+              %a{:href => "/calendar"}
+                %div.menu-calendars
+                %span
+                  = t(:calendar)
+                  %i.events_bubble_red#stason_calendar_counter
+            %li
+              %a{:href => "/docs"}
+                %div.menu-documents
+                %span
+                  = t(:documents)
+                  %i.events_bubble_red#stason_docs_counter
+            -#%li
+              %a{:href => "/options"}
+                %div.menu-options
+                %span
+                  Настройки
+            -#%li
+              %a{:href => "/other"}
+                %div.menu-other
+                %span
+                  Еще
+            %li
+              %a.link{:href => "/out", :title => ''}
+                %div.menu-exit
+                %span
+                  = t(:quit)
+
+          .menu_event_list#stason_event_list
+          -#.menu_event_list
+            .top.glass
+              .i.micro_tasks
+              .name
+                Задачи
+              .close_ico
+            %ul
+              %li
+                .name
+                  Мотвеев мотвей
+                .text
+                  Давно выяснено, что при оценке
+                  дизайна и композиции читаемый
+                  текст мешает сосредоточиться.
+              %li
+                .name
+                  Мотвеев мотвей
+                .text
+                  Добавил комментарий к
+                  %a{:href => "#"}
+                    123123123
+                  \:asd asd as das d
+          -#.menu_event_list
+            .top.glass
+              .i.micro_mails
+              .name
+                Письмо
+              .close_ico
+            %ul
+              %li
+                .name
+                  Мотвеев мотвей
+                .text
+                  Привет
+
+        -#.scrollbar
+          .track
+            .thumb
+              .end
+
+-#%script
+  $('.nav_left_menu').find('.viewport').tinyscrollbar();

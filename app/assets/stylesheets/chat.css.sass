@@ -1,0 +1,279 @@
+.chat_block
+  position: absolute
+  top: 47px !important
+  right: 8px !important
+  left: 9px !important
+  bottom: 6px !important
+  z-index: 500
+  background: rgb(250, 250, 250)
+  display: none
+  .content_block
+    right: 0
+    overflow: hidden
+    .head
+      padding: 10px
+      padding-bottom: 5px
+      position: relative
+      .title
+        text-align: center
+        color: #bababa
+        font-size: 14px
+      .button-box
+        .chat_close
+          cursor: pointer
+      .all_contacts_btn
+        float: right
+        position: absolute
+        top: 10px
+        right: 10px
+        cursor: pointer
+    .chat_box
+      overflow: hidden
+      position: absolute
+      top: 31px
+      left: 0
+      right: 0
+      bottom: 0
+      .left_column
+        width: 240px
+        border-right: 1px solid #e2e2e2
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        .head_search
+          width: 100%
+          overflow: hidden
+          .search
+            width: 100%
+            overflow: hidden
+            padding: 3px 5px
+            border-bottom: 1px solid #e2e2e2
+            box-sizing: border-box
+            -moz-box-sizing: border-box
+            -webkit-box-sizing: border-box
+            input
+              width: 100% !important
+              box-sizing: border-box
+              -moz-box-sizing: border-box
+              -webkit-box-sizing: border-box
+              height: 22px
+              background: #ffffff url("/assets/theme_1/ico.png") 5px -23px no-repeat
+        .viewport
+          position: absolute
+          left: 0
+          top: 30px
+          bottom: 0
+          right: 0
+          overflow-y: auto
+          .overview
+            overflow: hidden
+            .active_chat
+              @include gradient-vertical($startColor: #fdfdff, $endColor: #dfeaf7)
+            .chat_box_user
+              overflow: hidden
+              width: 100%
+              padding: 10px
+              box-sizing: border-box
+              -moz-box-sizing: border-box
+              -webkit-box-sizing: border-box
+              border-bottom: 1px solid #e2e2e2
+              cursor: pointer
+              position: relative
+              .img_box
+                width: 40px
+                height: 40px
+                overflow: hidden
+                float: left
+                margin-right: 10px
+                img
+                  width: 100%
+              .name
+                width: 150px
+                padding: 10px 0
+                @include text-overflow()
+                float: left
+
+
+
+      .right_column
+        position: absolute
+        top: 0
+        left: 241px
+        bottom: 0
+        right:  0
+        .head_name
+          font-size: 14px
+          color: #8f8f8f
+          text-align: left
+          border-bottom: 1px solid #e2e2e2
+          height: 28px
+          width: 100%
+          @include text-overflow()
+          p
+            padding: 4px 0
+            padding-left: 5px
+        .viewport
+          overflow-y: auto
+          position: absolute
+          top: 30px
+          left: 0
+          right: 0
+          bottom: 46px
+          background: #ffffff
+          .overview
+            overflow: hidden
+            .all_contacts
+              width: 100%
+              overflow: hidden
+              display: none
+              .contacnt_list_user:hover
+                @include gradient-vertical($startColor: #fdfdff, $endColor: #dfeaf7)
+              .contacnt_list_user
+                overflow: hidden
+                width: 100%
+                padding: 10px
+                box-sizing: border-box
+                -moz-box-sizing: border-box
+                -webkit-box-sizing: border-box
+                border-bottom: 1px solid #e2e2e2
+                cursor: pointer
+                position: relative
+                .img_box
+                  width: 40px
+                  height: 40px
+                  overflow: hidden
+                  float: left
+                  margin-right: 10px
+                  img
+                    width: 100%
+                .name
+                  width: 170px
+                  padding: 10px 0
+                  @include text-overflow()
+                  float: left
+            .message_box
+              overflow: hidden
+              box-sizing: border-box
+              -moz-box-sizing: border-box
+              -webkit-box-sizing: border-box
+              padding: 7px 10px
+              .img_box
+                width: 40px
+                height: 40px
+                overflow: hidden
+                @include box-shadow(0px 0px 1px 0px rgba(133, 133, 133, 0.5))
+                @include border-radius( 2px )
+                img
+                  width: 100%
+              .message_box_text
+                padding: 10px 15px
+                border:  1px solid #cccccc
+                @include border-radius( 3px )
+                max-width: 79%
+                position: relative
+                font-size: 14px
+                color: #242424
+                box-sizing: border-box
+                -moz-box-sizing: border-box
+                -webkit-box-sizing: border-box
+                //@include box-shadow(1px 1px 5px rgba(133, 133, 133, 0.5))
+                &:after
+                  position: absolute
+                  top: 15px
+                  content: ''
+                  border-style: solid
+                &:before
+                  position: absolute
+                  top: 14px
+                  content: ''
+                  border-style: solid
+            .theirs
+              .img_box
+                float: left
+              .message_box_text
+                margin-left: 25px
+                float: left
+                background: rgb(222,239,255)
+                background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RlZWZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5OGJlZGUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
+                background: -moz-linear-gradient(top,  rgba(222,239,255,1) 0%, rgba(152,190,222,1) 100%)
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(222,239,255,1)), color-stop(100%,rgba(152,190,222,1)))
+                background: -webkit-linear-gradient(top,  rgba(222,239,255,1) 0%,rgba(152,190,222,1) 100%)
+                background: -o-linear-gradient(top,  rgba(222,239,255,1) 0%,rgba(152,190,222,1) 100%)
+                background: -ms-linear-gradient(top,  rgba(222,239,255,1) 0%,rgba(152,190,222,1) 100%)
+                background: linear-gradient(to bottom,  rgba(222,239,255,1) 0%,rgba(152,190,222,1) 100%)
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#98bede',GradientType=0 )
+
+                &:after
+                  border-color: transparent #dfeaf7 transparent transparent
+                  left: -30px
+                  border-width: 0px 15px 15px
+                &:before
+                  border-color: transparent #cccccc transparent transparent
+                  border-width: 0px 16px 16px
+                  left: -33px
+            .me
+              .img_box
+                float: right
+              .message_box_text
+                margin-right: 25px
+                float: right
+                background: rgb(255,255,255)
+                background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQ3JSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZGVkZWQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
+                background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%)
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(47%,rgba(246,246,246,1)), color-stop(100%,rgba(237,237,237,1)))
+                background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%)
+                background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%)
+                background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%)
+                background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%)
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0)
+
+
+                &:after
+                  border-color: #ececec  transparent transparent transparent
+                  border-width: 15px 15px 0px 0px
+                  right: -14px
+                &:before
+                  border-color: #cccccc transparent transparent transparent
+                  border-width: 16px 16px 0px 0px
+                  right: -16px
+
+        .chat_input_box
+          position: absolute
+          bottom:  0
+          left: 0
+          right: 0
+          overflow: hidden
+          box-sizing: border-box
+          -moz-box-sizing: border-box
+          -webkit-box-sizing: border-box
+          border-top: 1px solid #e2e2e2
+          padding: 5px 5px
+          background: #fafafa
+          form
+            input[type=text]
+              position: absolute
+              left: 5px
+              right: 75px
+              bottom: 5px
+              top: 5px
+              width: auto !important
+              height: auto !important
+              margin: 0 !important
+              @include border-radius(10px)
+              box-sizing: border-box
+              -moz-box-sizing: border-box
+              -webkit-box-sizing: border-box
+            input[type=submit]
+              float: right
+              @include border-radius(10px)
+              @include gradient-vertical($startColor: #f5f5f5, $endColor: #eaeaea)
+              font-size: 14px
+              width: 65px
+              height: 35px
+              border: 1px solid #dcdcdc
+              box-sizing: border-box
+              -moz-box-sizing: border-box
+              -webkit-box-sizing: border-box
+
+

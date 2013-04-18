@@ -1,0 +1,10 @@
+.user-img
+  %img{:src => @user_photo, :width => '45', :height =>'45', :alt => '' }
+%span.pull-right.disabled.history-time
+  -#%i.icon-time
+  = Beweek3.todate(@created_at)
+%a.name{:href => "u-#{@user_id}", :title => ''}
+  = @user_name
+%p.action.text= t["history_" + @type_id]
+%p.text= @text
+.clear

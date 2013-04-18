@@ -1,0 +1,67 @@
+.content_block
+  .inner_first
+    .inner_seccond
+      .head
+        .info_block.fire
+          &nbsp;
+        .info_block.date
+          Завершение
+        .info_block.who
+          Кто поставил
+        .info_block.status
+          Статус
+        .button-box.pull-left
+          .add_btn{:url => '/tasks/f-new.task'}
+        .search
+          %input{:type => 'text', :value => '', :placeholder => 'Поиск'}
+      .viewport.task_viewport
+        %ul.container_list.list.overview.tasks
+
+        .scrollbar
+          .track
+            .thumb
+              .end
+.filter_block.viewports
+  .overview
+    .filter-box
+      .filter-line{:data => {:type => 'hurry'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Горит!
+    %br
+    .filter-box
+      .filter-line{:data => {:type => 'all'}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter Показать всё
+      .filter-line{:data => {:type => 'wait'}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter В ожидании
+      .filter-line{:data => {:type => 'work'}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter Выполняется
+      .filter-line{:data => {:type => 'comp'}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter Завершено 
+    %br
+    .filter-box
+      .filter-line{:data => {:type => 'all'}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter Показать всё
+      .filter-line{:data => {:type => 'author'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Я автор
+      .filter-line{:data => {:type => 'exec'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Я исполнитель
+      .filter-line{:data => {:type => 'watch'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Я наблюдатель
+    %br
+    .filter-box
+      .filter-line{:data => {:type => 'today'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Сегодня   
+
+  .scrollbar
+    .track
+      .thumb
+        .end

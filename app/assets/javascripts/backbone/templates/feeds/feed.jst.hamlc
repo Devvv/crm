@@ -1,0 +1,13 @@
+.user_name
+  %a{href: "/events/u-#{@user_id}"}= @user_name
+  %span.time= Beweek3.todate @created_at
+  - if (@comments > 0)
+    %span.message
+      %a{:href => "/events/f-#{@id}", :title => ''}= @comments
+
+  .clear
+  .event_name
+    %a{href: "/events/f-#{@id}"}= @name
+  .clear
+  %p.detail-text
+    %a{href: "/events/f-#{@id}"}= @text

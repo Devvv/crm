@@ -1,0 +1,10 @@
+.container_li{:data => {:type => @appointment}}
+  .info_block
+    %a{:href => "mailto:#{@email}", :title => ''}= @email
+  .info_block
+    = @phone
+  .user-name
+    %p.name
+      = @full_name
+    %p
+      = @appointment

@@ -1,0 +1,48 @@
+.content_block.layers_block{:data => { :id => "b-#{@id}" } }
+  .inner_first
+    .inner_seccond
+      .head
+        %a.close{:href => "#", :data => {:action => 'close_layer', :title => 'Закрыть'}}
+        - if @can_edit
+          %a.pull-right.destroy.trash{:href => "javascript:;", :title => 'Удалить'}     
+      .layers_block_le.viewport
+        .overview
+          .detail-info
+            .detail-name
+              - if @can_edit
+                %textarea.edit_field.auto_resize{:name => 'name', :placeholder => t.placeholder_name}
+                  = @name
+                .text_area_div
+              - else
+                %p= @name          
+            .clear
+          .detail-info
+            .detail-info
+              .detail-name
+                Счет №
+                %textarea.edit_field{:name => 'num', :placeholder => t.placeholder_name}= @num
+                от
+                %textarea.edit_field{:name => 'bill_date', :placeholder => t.placeholder_name}= @bill_date 
+                %input.add_position{:name => 'add_pos_btn', :type => 'button', :value => 'добавить позицию'}
+              .detail-name.bill-positions
+              .detail-name
+                Сделать скидку
+                %input.edit_field{:type => 'text', :name => 'discount', :value => @discount }
+                %br
+                Итого
+                %p#total_sum
+                  = @total_sum
+          .clear          
+
+        .scrollbar
+          .track
+            .thumb
+              .end
+
+.filter_block.layers_block_ri.viewport
+  .else_info.overview
+    
+    %div.p_line
+      = t.refers
+      .clear  
+    .slice-divider

@@ -1,0 +1,20 @@
+.container_li{:data => {:type => @status}}
+  - if parseInt(@importance) == 2
+    .info_block.fire.active
+      %div
+  - else
+    .info_block.fire
+      %div
+  .info_block.date.dropdown
+    -#%a.data_change{ :href => 'javascript:;', :title => '','data-date-format' => "dd.mm.yy", 'data-date' => "<%= end %>".html_safe}
+    = Beweek3.todate @end
+  .info_block.who
+    = @user_name
+  .info_block.status.dropdown{'data-toggle' => '#status'}
+    - item = router.feeds.get(@id)
+    = if item then item.status()
+
+  .name_Line
+    %a{:href => "/tasks/f-#{@id}", :title => ''}
+      = @id
+      = @name

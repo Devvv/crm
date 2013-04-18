@@ -1,0 +1,202 @@
+.content_block.layers_block.full_width_layer{:data => {:id => "u-#{@id}"}}
+  .inner_first
+    .inner_seccond
+      .head
+        %a.close{:href => "#", :data => {:action => 'close_layer', :title => 'Закрыть'}}
+        - if @can_edit or @can_edit_self
+          %a.pull-right.destroy.trash{:href => "#", :title => 'Удалить'}
+        -#%a.pull-right.star{:href => "#", :title => 'Добавить в избранное'}
+      .layers_block_le.viewport
+        .overview
+          .detail-info
+            .tabs-block.tabs-left
+
+              - hs = router.histories.where({user_id: @id})
+
+              %ul.nav.nav-tabs
+                %li.active
+                  %a.tab{:href => "#detail", 'data-toggle' => "tab"}
+                    = t.detail
+                %li
+                  %a{:href => "#history", :data => {:toggle => "tab"}}
+                    = t.histories
+                %li
+                  %a.tab{:href => "#task", 'data-toggle' => "tab"}
+                    = t.subtasks
+                    %span.ts_count
+                %li
+                  %a.tab{:href => "#deal", 'data-toggle' => "tab"}
+                    = t.subdeals
+                    %span.ds_count
+                %li
+                  %a.tab{:href => "#event", 'data-toggle' => "tab"}
+                    = t.subevents
+                    %span.es_count
+                -#%li
+                -#  %a.tab{:href => "#post", 'data-toggle' => "tab"}= t.subposts
+                %li
+                  %a.tab{:href => "#docs", 'data-toggle' => "tab"}
+                    = t.subdocs
+                    %span.dcs_count
+              .tab-content
+                .tab-pane.active#detail
+                  .person-info
+
+                    - if @can_edit_self
+                      .name.name_feelds
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Фамилия:'}
+                        %input.edit_field{:type => 'text', :name => 'surname', :value => @surname, :placeholder => '...'}
+                      .name.name_feelds
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Имя:'}
+                        %input.edit_field{:type => 'text', :name => 'name', :value => @name, :placeholder => '...'}
+                      .name.name_feelds
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Отчество:'}
+                        %input.edit_field{:type => 'text', :name => 'subname', :value => @subname, :placeholder => '...'}
+                    - else
+                      %p.show_field{"data-name" => "surname"}= @surname
+                      %p.show_field{"data-name" => "name"}= @name
+                      %p.show_field{"data-name" => "subname"}= @subname
+                    .name.name_feelds
+                      - if @can_edit
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Должность:'}
+                        %input.edit_field{:type => 'text', :name => 'appointment', :value => @appointment, :placeholder => '...'}
+                      - else
+                        %p.show_field{"data-name" => "appointment"}= @appointment
+
+                    .name.name_feelds
+                      - if @owner
+                        %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Доступ:'}
+                        %select.disabled#access{:disabled => "disabled"}
+                          %option{:selected => "selected"}= t.access_3
+                      - else
+                        - if @can_edit
+                          %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Доступ:'}
+                          %select#access.edit_field{:name => 'access'}
+                            %option{:value => "0", :selected => @access*1 == 0 ? "selected" : ""}= t.access_0
+                            %option{:value => "1", :selected => @access*1 == 1 ? "selected" : ""}= t.access_1
+                            %option{:value => "2", :selected => @access*1 == 2 ? "selected" : ""}= t.access_2
+
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Почта:', :placeholder => 'Почта:'}
+                      - if @can_edit_self
+                        %input.edit_field{:type => 'text', :name => 'email', :value => @email, :placeholder => '...'}
+                      - else
+                        %p.show_field{"data-name" => "email"}= @email
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Руководитель:', :placeholder => 'Руководитель:'}
+                      - if @can_edit
+                        %select.edit_field{:name => "user_id"}
+                          %option{:value => 0}= t.not_selected
+                          - for user in router.users.models
+                            - if user.id != @id
+                              %option{:value => user.id, :selected => @user_id == user.id ? "selected" : ""}= user.get_name()
+                      - else
+                        %p.show_field
+                          - u = router.users.get(@user_id)
+                          - if u
+                            %a{:href => "u-#{@user_id}"}= u.get_name()
+                          - else
+                            = t.not_selected
+                    .name.name_feelds
+                      %input.disable{:type => 'text', :disabled => 'disabled', :value => 'Телефон:', :placeholder => 'Телефон:'}
+                      - if @can_edit_self
+                        %input.edit_field{:type => 'text', :name => 'phone', :value => @phone, :placeholder => '...'}
+                      - else
+                        %p.show_field{"data-name" => "phone"}= @phone
+
+                .tab-pane#history
+                  .p
+                    %label
+                      %input.history-filter{type: "checkbox"}
+                      Только комментарии
+                  #histories{:data => {:id => @id}}
+                    - if hs.length > 0
+                      - for h in hs
+                        - u = router.users.get(h.get('user_id'))
+                        .history-block{data: {type: h.get('type_id')}}
+                          .user-img
+                            %img{:src => u.get('photo_path_thumb'), :width => '45', :height =>'45', :alt => '' }
+                          %span.pull-right.disabled.history-time
+                            -#%i.icon-time
+                            = Beweek3.todate(h.get('created_at'))
+                          %a.name{:href => "u-#{u.id}", :title => ''}
+                            = u.get_name()
+                          %p.action.text= t["history_" + h.get('type_id')]
+                          %p.text= h.get('text')
+                          .clear
+
+                .tab-pane#task
+                  .list-line
+                    .right-block-name.date
+                      До
+                    .right-block-name.who
+                      Постановщик
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 1, :user_to => @id}, :url => "f-new.task?#{@id}"}
+                    %input.search-query{:type => "text", :value => "", :placeholder => 'Поиск'}
+
+                .tab-pane#deal
+                  .list-line
+                    .right-block-name.date
+                      До
+                    .right-block-name.who
+                      Менеджер
+                    -#.right-block-name.tottal
+                    -#  Сумма
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 2, :user_to => @id}, :url => "f-new.deal?#{@id}"}
+                    %input.search-query{:type => "text", :value => "", :placeholder => 'Поиск'}
+
+                .tab-pane#event
+                  .list-line
+                    .right-block-name.date
+                      До
+                    .right-block-name.who
+                      Менеджер
+                    -#.right-block-name.tottal
+                    -#  Сумма
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 3, :user_to => @id}, :url => "f-new.event?#{@id}"}
+                    %input.search-query{:type => "text", :value => "", :placeholder => 'Поиск'}
+
+                .tab-pane#post
+                  .list-line
+                    .right-block-name.speakers
+                      Кто участвует
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 0, :user_to => @id}, :url => "f-new.post?#{@id}"}
+                    %input.search-query.box_search{:type => "text", :value => "", :placeholder => 'Поиск'}
+
+                .tab-pane#docs
+                  .list-line
+                    .right-block-name.date
+                      До
+                    .right-block-name.who
+                      Менеджер
+                    -#.right-block-name.tottal
+                    -#  Сумма
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 4, :user_to => @id}, :url => "f-new.docs?#{@id}"}
+                    %input.search-query{:type => "text", :value => "", :placeholder => 'Поиск'}
+
+            .img-block
+              .person-img
+                %img{:src => @photo_path_medium, :width => '110', :height =>'110', :alt => '' }
+                - if @can_edit_self
+                  .load-img
+                    %form#user_photo{:action => "/ajax/user_photo", :enctype => "multipart/form-data", :method => "post"}
+                      %input.photo_field{type: "file", name: "user[photo]"}
+
+                    Изменить
+        .scrollbar
+          .track
+            .thumb
+              .end

@@ -1,0 +1,14 @@
+- if devise_mapping.omniauthable?
+  - bound_providers = current_user.get_providers
+  -if bound_providers
+    - resource_class.omniauth_providers.each do |provider|
+      - if bound_providers.include?(provider.to_s)
+        "Отвязать от #{provider.to_s.titleize}"
+        %br
+      - else
+        = link_to "Привязать аккаунт в  #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), :class => "link"
+        %br
+  - else
+    - resource_class.omniauth_providers.each do |provider|
+      = link_to "Привязать аккаунт в  #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), :class => "link"
+      %br

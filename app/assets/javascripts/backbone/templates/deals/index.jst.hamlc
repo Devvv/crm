@@ -1,0 +1,43 @@
+.content_block
+  .inner_first
+    .inner_seccond
+      .head
+        .info_block.fire
+          &nbsp;
+        .info_block.date
+          Завершение
+        .info_block.who
+          Кто поставил
+        -#.info_block.tottal
+          Сумма
+        .info_block.status
+          Статус
+        .button-box.pull-left
+          .add_btn{:url => '/deals/f-new.deal'}
+        .search
+          %input{:type => 'text', :value => '', :placeholder => 'Поиск'}
+      .viewport.task_viewport
+        %ul.container_list.list.overview.deals
+
+        .scrollbar
+          .track
+            .thumb
+              .end
+.filter_block.viewport
+  .overview
+    .filter-box
+      .filter-line{:data => {:type => "todo"}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter= "to do"
+      .filter-line{:data => {:type => "doing"}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter= "doing"
+      .filter-line{:data => {:type => "done"}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter= "done"
+
+
+  .scrollbar
+    .track
+      .thumb
+        .end

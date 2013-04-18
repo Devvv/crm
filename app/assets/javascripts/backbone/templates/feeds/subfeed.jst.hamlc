@@ -1,0 +1,11 @@
+%a{:href => "f-#{@id}"}
+  .right-block-name.date
+    %p= Beweek3.todate(@end)
+  .right-block-name.who
+    - u = router.users.get(@user_id)
+    - if u
+      %p= u.get_name()
+  .right-block-name.status
+    %p= t["status_#{@status_id}"]
+  .name
+    %p= @name

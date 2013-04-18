@@ -1,0 +1,295 @@
+$dateWidth: 14%
+$WhoWidth: 11%
+$StatusWidth: 13%
+$tottal: 13%
+$longText: 57%
+$FireWidth: 25px
+$ActionWidth: 12%
+$LinkedWidth: 30%
+
+
+$ico_block: 10px
+
+$task-color: #66CC66
+$message-color:  #66CCff
+.container_list
+  list-style: none
+  margin: 0
+  padding: 0
+  margin: -5px
+  li
+    padding: 10px 15px
+    min-height: 10px
+    cursor: pointer
+    border-bottom: 1px solid #d4d4d4
+    box-sizing: border-box
+    -moz-box-sizing: border-box
+    -webkit-box-sizing: border-box
+    width: 100%
+    a.container_li
+      display: block
+      overflow: hidden
+      width: 100%
+    .container_li
+      overflow: visible
+ul.events
+  margin-top: -5px
+  li.event-line
+
+    .user_name
+      @include text-overflow()
+      margin-bottom: 0px
+      font-size: 12px
+      color: #5e5e5e
+      padding-left: 40px
+      span.time
+        color: #a0a0a0
+        float: right
+        @include border-top-left-radius(0)
+        @include border-bottom-left-radius(10px)
+
+      span.message
+        float: right
+        margin-right: 10px
+        a
+          display: block
+          padding-right: 18px
+          font-size: 12px
+          background: url("/assets/theme_1/ico.png") right -46px no-repeat
+      .event_name
+        @include text-overflow()
+        font-size: 14px
+        font-weight: bold
+        color: #1e97e2
+      .detail-text
+        @include text-overflow()
+        font-size: 13px
+        color: #4d4d4d
+        margin-bottom: 0
+
+.head
+  border-bottom: 1px solid #dddddd
+  padding: 10px
+  margin: -5px
+  padding-top: 5px
+  display: block
+  height: 20px
+  overflow: visible
+  margin-bottom: 0
+  padding-bottom: 5px
+  .close
+    float: left
+  .button-box
+    margin-right: 10px
+    .btn
+      padding: 0 10px
+    .add_select_date
+      text-align: center
+      margin-bottom: 0
+      line-height: 22px
+      font-size: 20px
+      cursor: pointer
+      width: 300px
+      margin: 0 auto
+      color: #08C
+      .btn.pull-right
+        margin: 0
+    .add_btn
+      float: left
+  .info_block
+    float: right
+    width: 20%
+    vertical-align: middle
+    @include text-overflow()
+    margin-right: 5px
+    text-shadow: 1px 1px 1px #ffffff
+    color: #777777
+    &:first-child
+      margin-right: 0
+    a
+      font-size: 14px
+  .date
+    width: $dateWidth
+    text-align: right
+  .who
+    width: $WhoWidth
+  .tottal
+    width: $tottal
+  .status
+    width: $StatusWidth
+  .fire
+    width: $FireWidth
+  .action
+    width: $ActionWidth
+  .linked
+    width: $LinkedWidth
+.search
+  position: relative
+
+  input
+    padding: 0 25px
+    margin: 0
+    @include border-radius(10px)
+    height: 18px
+    width: 25% !important
+    float: left
+    line-height: 18px
+    background: url("/assets/theme_1/ico.png") 5px -23px no-repeat
+  .search-query
+    width: 177px !important
+ul.list
+  margin-top: -5px
+  li
+    padding-bottom: 5px
+    margin-bottom: 0
+    min-height: 65px
+    .container_li
+      overflow: visible
+      display: block
+      p
+        text-overflow: ellipsis
+        white-space: nowrap
+        margin-bottom: 5px
+        font-size: 12px
+        &:last-child
+          margin-bottom: 0
+        span
+          float: right
+          padding: 1px 6px
+          margin-top: -6px
+          @include border-top-left-radius(0)
+          @include border-bottom-left-radius(10px)
+      a
+        @include text-overflow()
+        font-size: 14px
+      img
+        width: 40px
+        height: 40px
+        float: left
+        margin-right: 10px
+      .name_Line
+        @include text-overflow()
+        padding-right: 20px
+      .info_block
+        @include text-overflow()
+        width: 20%
+        margin-right: 5px
+        float: right
+        &:first-child
+          margin-right: 0
+        a
+          font-size: 13px
+      .date
+        width: $dateWidth
+        text-align: right
+      .who
+        width: $WhoWidth
+      .tottal
+        width: $tottal
+      .status
+        width: $StatusWidth
+      .fire
+        width: 25px
+        height: 20px
+        background: url("/assets/theme_1/ico.png") 5px -281px no-repeat
+        margin-top: -2px
+      .fire.active
+        background: url("/assets/theme_1/ico.png") 5px -305px no-repeat
+      .linked
+        width: $LinkedWidth
+        font-size: 12px
+        a
+          font-size: 14px
+        .not_linked
+          font-size: 12px
+          color: #c1c1c1
+      .action
+        width: $ActionWidth
+        div
+          float: right
+          margin-left: 15px
+        .upload
+          margin-top: 1px
+          margin-left: 0
+      .doc_detail
+        width: 300px
+        overflow: hidden
+        .prew
+          overflow: hidden
+          float: left
+          margin-right: 20px
+          .file
+        .det
+          float: left
+          font-size: 12px
+          width: 216px
+          p
+            text-overflow: ellipsis
+            overflow: hidden
+            white-space: nowrap
+            margin-bottom: 0
+          p.name
+            font-size: 14px
+          p.size
+            color: #8a8a8a
+          p.user
+          p.data
+      .user-name
+        overflow: visible
+        p
+          padding-right: 15px
+          @include text-overflow()
+          font-size: 14px
+          margin-bottom: 3px
+        p.name
+          font-weight: bold
+          margin-bottom: 0
+.content_inner_viewport
+  position: absolute !important
+  left:  5px
+  right: 5px
+  bottom: 5px
+  top:  33px
+.calendar_view
+  top: 46px
+
+.mails
+  li.new
+    font-weight: bold
+  li
+    .container_li
+
+      .info_block
+        float: left !important
+        line-height: 24px !important
+        font-size: 13px
+        &:first-letter
+          text-transform: uppercase
+      img
+        width: 25px !important
+        height: 25px !important
+      .ico_block
+        float: left !important
+        width: auto !important
+        margin-right: 0 !important
+      .date
+        float: right !important
+        width: auto !important
+      .who
+        float: left !important
+        width:  auto !important
+        margin: 0 20px !important
+      .long_text
+        float: none !important
+        width: auto !important
+        @include text-overflow()
+        padding-right: 20px
+        span
+          color: #333333 !important
+          margin-left: 10px
+          &:first-letter
+            text-transform: uppercase  !important
+
+
+
+

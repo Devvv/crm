@@ -1,0 +1,39 @@
+.content_block
+  .inner_first
+    .inner_seccond
+      .head
+        .button-box.no_margin_right
+          .add_btn.pull-left{:url => '/calendar/f-new.event'}
+          %div.pull-right
+            %button.btn.btn-link#calendar_today
+              Сегодня
+          .add_select_date
+            %button.btn.btn-link.pull-right#calendar_right
+              %i.icon-arrow-right
+            %span
+              %input#calendar_date_show{:type => 'hidden', :value => '12.12.1012'}
+              %span date
+            %button.btn.btn-link.pull-left#calendar_left
+              %i.icon-arrow-left
+      .viewport.content_inner_viewport.calendar_view
+        .clear
+        .calendar
+
+.filter_block.calendar_all_events
+  .btn-group
+    %button.btn#agendaDay.viewChange
+      День
+    %button.btn#agendaWeek.viewChange
+      Неделя
+    %button.btn#month.viewChange
+      Месяц
+  .search
+    %input.search-query{:type => 'text', :value => '', :placeholder => 'Поиск'}
+  .filter_events_list.viewports
+    .overview
+      .inner
+      //content
+    .scrollbar
+      .track
+        .thumb
+          .end

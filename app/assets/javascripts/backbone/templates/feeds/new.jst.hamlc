@@ -1,0 +1,21 @@
+.content_block.layers_block{:data => { :id => "f-new" } }
+  .inner_first
+    .inner_seccond
+      .head
+        %a.close{:href => "#", :data => {:action => 'close_layer', :title => 'Закрыть'}}
+      .layers_block_le.viewport
+        .overview
+          .detail-info
+            .detail-name
+              %textarea.edit_field.auto_resize{:name => 'name', :placeholder => t.placeholder_name}
+                = @name
+              .text_area_div
+            .detail-text
+              %textarea.edit_field.auto_resize{:name => 'text', :placeholder => t.placeholder_text}
+                = @text
+              .text_area_div
+            .detail-text
+              %button.btn#submit= t.create
+
+            .clear
+          .clear

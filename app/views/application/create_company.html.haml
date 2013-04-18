@@ -1,0 +1,94 @@
+!!!
+%html
+  %head
+    %title Beweek2 create company
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    = stylesheet_link_tag    "application", :media => "all"
+    = csrf_meta_tags
+
+    = yield(:head)
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};"
+    = javascript_include_tag "create_company"
+
+  %body
+    .container-fluid.clear_left_margin
+      .main-container.create_company
+        .content_block
+          .inner_first
+            .inner_seccond
+              .viewport.content_inner_viewport
+                .overview
+                  .create_company_plane
+                    = form_tag :create, :method => :post do
+                      -#.span3
+                        %label.well
+                          %h2.muted= t(:company_type_0)
+                          -#%p
+                            -#span.label POPULAR
+                          %ul
+                            %li Unlimited access with no limits
+                            %li 100 MB of space
+
+                          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.
+                          %hr
+                            %h3 FREE
+                          
+                          = radio_button_tag 'company[type_id]', 0
+                                  
+                      .span3
+                        %label.well
+                          %h2.text-warning= t(:company_type_1)
+                          -#%p
+                            -#%span.label.label-success POPULAR
+                          %ul
+                            %li 1 GB of space
+                            %li Unlimited access with no limits
+                          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.
+                          %hr
+                            %h3 1 490 / month
+                
+                          = radio_button_tag 'company[type_id]', 1
+                             
+                      .span3
+                        %label.well
+                          %h2.text-info= t(:company_type_2)
+                          -#%p
+                            -#%span.label.label-info BUDGET
+                          %ul
+                            %li 10 GB of space
+                            %li Unlimited access with no limits
+                          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.
+                          %hr
+                            %h3 9 990 / month
+                          = radio_button_tag 'company[type_id]', 2
+                      .forms_el
+                        .lb 
+                          %fieldset
+                            .form-horizontal
+                              %legend 
+                                Создание компании
+
+                              %p.error= flash[:alert]
+                              .control-group
+                                %label.control-label= t(:company_name)
+                                .controls
+                                  = text_field_tag 'company[name]'
+                                  %span Длина не менее 3х символов
+                              .control-group
+                                %label.control-label= t(:company_description)
+                                .controls
+                                  = text_area_tag 'company[text]'
+                              .control-group
+                                %label.control-label= t(:company_code)
+                                .controls
+                                  = text_field_tag 'company[code]'    
+                                  = '.beweek.ru'
+                                  %span Длина не менее 3х символов
+                              .control-group
+                                %label.control-label
+                                .controls.subm_btn
+                                  = submit_tag t(:create_company)
+                            .link_block
+                              %legend 
+                                %a.to_back{:href => 'javacript:;', :title => ''} Назад
+                                = link_to t(:logout), :out

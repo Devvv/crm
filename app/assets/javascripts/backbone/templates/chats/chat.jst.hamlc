@@ -1,0 +1,18 @@
+- chat = new Beweek3.Models.Chat()
+- chat.set this
+.img_box
+  - if chat
+    %img{ :width => "40", :height => "40", :src => chat.get_img(), :alt => chat.get_name()}
+.name
+  - if chat
+    = chat.get_name()
+  - else
+    Без названия
+
+  %a.hide_btn{ :href => "" }
+    [x]
+
+  - if @unread > 0
+    %i.chat_unread_bumbum=@unread
+  - else
+    %i.chat_unread_bumbum.hide=@unread

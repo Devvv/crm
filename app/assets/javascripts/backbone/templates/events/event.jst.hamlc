@@ -1,0 +1,12 @@
+- feed = router.feeds.get(@feed_id)
+- if feed
+  .top.glass
+    .i.micro_tasks
+    .name
+      Уведомление
+    .close_ico.stason_delete_event_btn
+  %ul
+    %li
+      .name
+        %a{:href => 'f-' + feed.id}=feed.get('name')
+      .text=feed.get('text')

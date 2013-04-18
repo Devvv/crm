@@ -1,0 +1,382 @@
+.content_block.layers_block{:data => { :id => "f-#{@id}" } }
+  .inner_first
+    .inner_seccond
+      .head
+        %a.close{:href => "#", :data => {:action => 'close_layer', :title => 'Закрыть'}}
+        - if @can_edit
+          %a.pull-right.destroy.trash{:href => "javascript:;", :title => 'Удалить'}
+        -#%a.pull-right.star{:href => "javascript:;", :title => 'Добавить в избранное'}
+      .layers_block_le.viewport
+        .overview
+          .detail-info
+            .detail-name
+              - if @can_edit
+                %textarea.edit_field.auto_resize{:name => 'name', :placeholder => t.placeholder_name}
+                  = @name
+                .text_area_div
+              - else
+                %p.show_field{:data => {:name => "name"}}= @name
+            .detail-text
+              - if @can_edit
+                %textarea.edit_field.auto_resize{:name => 'text', :placeholder => t.placeholder_text}
+                  = @text
+                .text_area_div
+              - else
+                %p.show_field{:data => {:name => "text"}}= @text
+            - if @id > 0
+              .detail-text.files_list
+                - if !_.isEmpty(@files)
+                  - for fid, file of @files
+                    .files{:data => {:type => file.file_content_type, :id => fid}}
+                      %p
+                        %a.link{:href => "/download/" + fid, :target => "_blank"}= file.file_file_name
+                        - if @can_edit
+                          %a.del_file{:href => "#", :data => {:id => file.id}} X
+
+              - if @can_edit
+                .detail-text.files_upload
+                  .file-add
+                    .file-line
+                      %a.btn.btn-link.add_file{:href => "#", :onclick => "$(this).parent().find('form input[type=file]').trigger('click');"}= t.add_file
+                      %span.hide.btn.btn-link.remove-file
+                        %i.icon-remove
+                      %form.file_upload_form{:action => "/ajax/upload", :enctype => "multipart/form-data", :method => "post"}
+                        %input{:type => "hidden", :name => "feed_id", :value => @id}
+                        %input.file_upload{:type => "file", :name => "file"}
+            .clear
+          .clear
+          - if @id > 0
+            .tabs-block.tabs-left.feed_tabs
+              - hs = router.histories.where({feed_id: @id})
+              - bs = router.bills.where({feed_id: @id})
+              %ul.nav.nav-tabs
+                %li.active
+                  %a{:href => "#", :data => {:toggle => "tab"}}= t.histories
+                %li
+                  %a{:href => "#task", :data => {:toggle => "tab"}}
+                    = t.subtasks
+                    %span.ts_count
+                %li
+                  %a{:href => "#deal", :data => {:toggle => "tab"}}
+                    = t.subdeals
+                    %span.ds_count
+                %li
+                  %a{:href => "#event", :data => {:toggle => "tab"}}
+                    = t.subevents
+                    %span.es_count
+                -#%li
+                -#  %a{:href => "#post", :data => {:toggle => "tab"}}= t.subposts + " (#{ps.length})"
+                %li
+                  %a{:href => "#docs", :data => {:toggle => "tab"}}
+                    = t.subdocs
+                    %span.dcs_count
+                -#%li
+                  %a{:href => "#bills", :data => {:toggle => "tab"}}= t.subbills + " #{bs.length || ""}"
+              .tab-content
+                .tab-pane.active#history
+                  .well.well-small
+                    %form.history-form{:action => "", :method => "post", :enctype => "multipart/form-data"}
+                      %textarea.history-text{:name => "history[text]"}
+                      .clear
+                      %button.btn.history-add{:type => "button"}= t.sumbit_history
+                  .p
+                    %label
+                      %input.history-filter{type: "checkbox"}
+                      Только комментарии
+                  #histories{:data => {:id => @id}}
+                    - if hs.length > 0
+                      - for h in hs
+                        - u = router.users.get(h.get('user_id'))
+                        .history-block{data: {type: h.get('type_id')}}
+                          .user-img
+                            %img{:src => u.get('photo_path_thumb'), :width => '45', :height =>'45', :alt => '' }
+                          %span.pull-right.disabled.history-time
+                            -#%i.icon-time
+                            = Beweek3.todate(h.get('created_at'))
+                          %a.name{:href => "u-#{u.id}", :title => ''}
+                            = u.get_name()
+                          %p.action.text= t["history_" + h.get('type_id')]
+                          %p.text= h.get('text')
+                          .clear
+
+                .tab-pane#task
+                  .list-line{:style => "overflow: visible;"}
+                    .right-block-name.date
+                      До
+                    .right-block-name.who
+                      Постановщик
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 1, :feed_id => @id}, :url => "f-new.task!#{@id}"}
+                    %select.chosen#add_1_select
+                      %option{value: 0}= t.create
+                      - for f in router.feeds.where({type_id: 1})
+                        - if f.id != @id
+                          %option{value: f.id}= f.id + " " + f.get('name')
+                    -#%input.search-query.pull-left{:type => "text", :value => "", :placeholder => 'Поиск'}
+                    -#%i.pull-right.icon-filter
+
+                .tab-pane#deal
+                  .list-line{:style => "overflow: visible;"}
+                    .right-block-name.date
+                      До
+                    .right-block-name.who
+                      Менеджер
+                    -#.right-block-name.tottal
+                    -#Сумма
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 2, :feed_id => @id}, :url => "f-new.deal!#{@id}"}
+                    %select.chosen#add_2_select
+                      %option{value: 0}= t.create
+                      - for f in router.feeds.where({type_id: 2})
+                        - if f.id != @id
+                          %option{value: f.id}= f.id + " " + f.get('name')
+                    -#%input.search-query{:type => "text", :value => "", :placeholder => 'Поиск'}
+                    -#%i.pull-right.icon-filter
+
+                .tab-pane#event
+                  .list-line{:style => "overflow: visible;"}
+                    .right-block-name.date
+                      До
+                    .right-block-name.who
+                      Менеджер
+                    -#.right-block-name.tottal
+                    -#Сумма
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 3, :feed_id => @id}, :url => "f-new.event!#{@id}"}
+                    %select.chosen#add_3_select
+                      %option{value: 0}= t.create
+                      - for f in router.feeds.where({type_id: 3})
+                        - if f.id != @id
+                          %option{value: f.id}= f.id + " " + f.get('name')
+                    -#%input.search-query{:type => "text", :value => "", :placeholder => 'Поиск'}
+                    -#%i.pull-right.icon-filter
+
+                .tab-pane#post
+                  .list-line
+                    .right-block-name.speakers
+                      Кто участвует
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 0, :feed_id => @id}, :url => "f-new.post!#{@id}"}
+                    %input.search-query.box_search{:type => "text", :value => "", :placeholder => 'Поиск'}
+
+                .tab-pane#docs
+                  .list-line{:style => "overflow: visible;"}
+                    .right-block-name.date
+                      До
+                    .right-block-name.who
+                      Менеджер
+                    -#.right-block-name.tottal
+                    -#Сумма
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 4, :feed_id => @id}, :url => "f-new.docs!#{@id}"}
+                    %select.chosen#add_4_select
+                      %option{value: 0}= t.create
+                      - for f in router.feeds.where({type_id: 1})
+                        - if f.id != @id
+                          %option{value: f.id}= f.id + " " + f.get('name')
+                    -#%input.search-query.box_search{:type => "text", :value => "", :placeholder => 'Поиск'}
+
+                .tab-pane#bills
+                  .list-line
+                    .right-block-name.date
+                      От
+                    .right-block-name.who
+                      Менеджер
+                    -#.right-block-name.tottal
+                    -#Сумма
+                    .right-block-name.status
+                      Статус
+                    .button-box.pull-left
+                      .add_btn#add_task_btn.add_sub_btn{:data => {:type_id => 5, :feed_id => @id}, :url => "b-new.bills!#{@id}" }
+                    %input.search-query.box_search{:type => "text", :value => "", :placeholder => 'Поиск'}
+                  - if bs.length > 0
+                    - for b in bs
+                      .list-line.no-bg
+                        %a{:href => "b-#{b.id}"}
+                          .right-block-name.date
+                            %p= Beweek3.todate(b.get('bill_date'))
+                          .right-block-name.who
+                            - u = router.users.get(b.get('user_id'))
+                            %p= u.get_name()
+                          .right-block-name.status
+                            %p= t["status_#{b.status_id}"]
+                          .name
+                            %p= b.get('name')
+  
+
+        .scrollbar
+          .track
+            .thumb
+              .end
+
+.filter_block.layers_block_ri.viewport
+  .else_info.overview
+
+    - if @type_id != 0
+      %p.p_line
+        = t.status
+        - if @can_edit
+          %a.status{'data-toggle' => '#status_layer', :href => '#', :title => ''}
+            %span#stts{:data => {:sts => @status_id}}= t["status_#{@status_id}"]
+            %input.edit_field{:type => 'hidden', :name => 'status_id',  :value => @status_id}
+        - else
+          %span.show_field{"data-name" => "status_id"}= t["status_#{@status_id}"]
+
+      .slice-divider
+      %p.p_line
+        = t.feed_start
+        - if @can_edit
+          %a.data_change_time{:href => '#', :title => '', 'data-date' => @start}
+            %span= Beweek3.todate @start
+            %input.edit_field.datepicker{:type => 'hidden', :name => 'start', :value => @start}
+        - else
+          %span.show_field{"data-name" => "start"}= Beweek3.todate @start
+
+      .slice-divider
+      %p.p_line
+        = t.feed_end
+        - if @can_edit
+          %a.data_change_time{:href => '#', :title => '', 'data-date' => @end}
+            %span= Beweek3.todate @end
+            %input.edit_field.datepicker{:type => 'hidden', :name => 'end', :value => @end}
+        - else
+          %span.show_field{"data-name" => "end"}= Beweek3.todate @end
+
+      .slice-divider
+    - else
+      %p.p_line
+        = t.public_feed
+        - if @can_edit
+          %input.edit_field{:type => 'hidden', :name => 'public', :value => if @public == 1 then '1' else '0'}
+          %input{:onchange => 'if(this.checked===true){$("[name=public]:input").val(1);}else{$("[name=public]:input").val(0);}$("[name=public]:input").trigger("change");', :type => 'checkbox', :value => '1', :checked => if @public == 1 then true else false}
+        - else
+          - if @public == 1
+            %span.show_field{"data-name" => "public"}= t.public_yes
+          - else
+            %span.show_field{"data-name" => "public"}= t.public_no
+
+      .slice-divider
+    %p.p_line
+      = t.importance
+      - if @can_edit
+        %a.importance{'data-toggle' => '#importance_layer', :href => '#', :title => ''}
+          %span#imprts{:data => {:imp => @importance}}= t["importance_#{@importance}"]
+          %input.edit_field{:type => 'hidden', :name => 'importance',  :value => @importance}
+      - else
+        %span.show_field{"data-name" => "importance"}= t["importance_#{@importance}"]
+
+    .slice-divider
+    - if @type_id != 0
+      %div.p_line
+        = t.for
+        - if @can_edit
+          .clear
+          %select.edit_field.chosen{name: "user_to"}
+            %option{value: 0}= t.not_selected
+            - for u in router.users.models
+              %option{value: u.id, selected: @user_to == u.id ? true : false}= u.get_name()
+          .clear
+        - else
+          .clear
+          %span.show_field{"data-name" => "user_to"}
+            - if @user_to > 0
+              %a{:href => "u-#{@user_to}"}= router.users.get(@user_to).get_name()
+            - else
+              = t.not_selected
+          .clear
+
+      .slice-divider
+    %div.p_line
+      = t.refers
+      - if @can_edit
+        .clear
+        %select.edit_field.chosen{name: "refers", multiple: "multiple"}
+          - for u in router.users.models
+            %option{value: u.id, selected: _.indexOf(@refers, u.id) > -1 ? true : false}= u.get_name()
+        .clear
+      - else
+        .clear
+        %span.show_field{"data-name" => "refers"}
+          - if @refers.length > 0
+            - n = 0
+            - for uid in @refers
+              - n += 1
+              %a{:href => "u-#{uid}"}= router.users.get(uid).get_name()
+              - if n < @refers.length
+                ,
+          - else
+            %p= t.not_selected
+        .clear
+
+
+    - if @type_id == 2
+      .slice-divider
+      %div.p_line
+        = t.contacts
+        - if @can_edit
+          .clear
+          %select.edit_field.chosen{name: "conts", multiple: "multiple"}
+            - for c in router.contacts.models
+              %option{value: c.id, selected: _.indexOf(@conts, c.id) > -1 ? true : false}= c.get_name()
+          .clear
+        - else
+          .clear
+          %span.show_field{"data-name" => "conts"}
+            - if @conts.length > 0
+              - m = 0
+              - for cid in @conts
+                - m += 1
+                %a{:href => "c-#{cid}"}= router.contacts.get(cid).get_name()
+                - if m < @conts.length
+                  ,
+            - else
+              %p= t.not_selected
+          .clear
+
+    .slice-divider
+    %div.p_line
+      = t.parent
+      - if @can_edit
+        .clear
+        %select.edit_field.chosen{name: "feed_id"}
+          %option{value: 0}= t.not_selected
+          - for f in router.feeds.models
+            %option{value: f.id, selected: @feed_id == f.id ? true : false}= f.id + " " + f.get('name')
+        .clear
+      - else
+        .clear
+        %span.show_field{"data-name" => "feed_id"}
+          - f = router.feeds.get(@feed_id)
+          - if f
+            %a{:href => "f-#{@feed_id}"}= f.id + " " + f.get('name')
+          - else
+            = t.not_selected
+        .clear
+
+  .scrollbar
+    .track
+      .thumb
+        .end
+
+%ul.dropdown-menu.hide#importance_layer
+  %li
+    %a{:href => '#', :title => '', :data => {:imp => '2'} }= t.importance_2
+  %li
+    %a{:href => '#', :title => '', :data => {:imp => '1'} }= t.importance_1
+  %li
+    %a{:href => '#', :title => '', :data => {:imp => '0'} }= t.importance_0
+%ul.dropdown-menu.hide#status_layer
+  %li
+    %a{:href => '#', :title => '', :data => {:sts => '0'} }= t.status_0
+  %li
+    %a{:href => '#', :title => '', :data => {:sts => '50'} }= t.status_50
+  %li
+    %a{:href => '#', :title => '', :data => {:sts => '100'} }= t.status_100

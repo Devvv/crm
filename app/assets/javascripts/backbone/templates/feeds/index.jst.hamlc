@@ -1,0 +1,45 @@
+.content_block
+  .inner_first
+    .inner_seccond
+      .head
+        .button-box.pull-left
+          .add_btn{:url => '/events/f-new'}
+        .search
+          %input{:type => 'text', :value => '', :placeholder => 'Поиск'}
+
+
+      .layers_block_le.viewport
+        %ul.container_list.events.overview#feeds
+
+
+        .scrollbar
+          .track
+            .thumb
+              .end
+
+
+.filter_block.viewport
+  .overview
+    .filter-box
+      .filter-line{:data => {:type => 'all'}}
+        .checkbox-filter.custom_checkbox.active
+        .name-filter Показать все
+      .filter-line{:data => {:type => 'post'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Сообщения
+      .filter-line{:data => {:type => 'task'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Задачи
+      .filter-line{:data => {:type => 'deal'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Сделки
+      .filter-line{:data => {:type => 'doc'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Документы
+      .filter-line{:data => {:type => 'event'}}
+        .checkbox-filter.custom_checkbox
+        .name-filter Календарь
+  .scrollbar
+    .track
+      .thumb
+      .end
